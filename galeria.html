@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <title>Galería Fragmentada</title>
+    </head>
+    <body>
+      <header>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <!-- Solo logo para móvil y tablet -->
+                <div class="navbar-brand d-md-none">
+                    <a href="index.html">
+                        <img src="imagenes/gatico.png" alt="Logo Gato" id="gatico" class="me-2" />
+                    </a>
+                    </div>
+                <!-- Logo + texto para pantallas grandes -->
+                <div class="navbar-brand d-none d-md-flex align-items-center">
+                    <a href="index.html">
+                        <img src="imagenes/gatico.png" alt="Logo Gato" id="gatico" class="me-2" />
+                        <span href="index.html" class="tesxt-white fw-bold">Fragmentados</span>
+                    </a>    
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="galeria.html">Galeria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      </header>
+        <main>
+            <div >
+              <div >
+                <div class="container text-center my-4">
+                  <h2 class="fw-bold">Louis Wain</h2>
+                  <p class="mx-auto" style="max-width: 700px; font-size: 1.1rem;">
+                    Louis Wain (1860-1939) fue un ilustrador inglés famoso por sus dibujos de gatos antropomorfos. Su estilo evolucionó desde lo realista hasta lo psicodélico, reflejando posibles cambios en su salud mental. Su obra sigue siendo influyente en el arte y en estudios sobre creatividad.
+                  </p>
+                </div>              
+                <div>
+                  <div class="container text-center">
+                    <div>
+                      <div class="row justify-content-center g-3">
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/catfish.webp" alt="Gato con gatitos.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/gagatito_red.webp" alt="Gatos psicodélicos comiendo uvas.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/gatos_red.webp" alt="Gato con botella.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/gatitoHilos_red.webp" alt="Gatos jugando con cuerdas.">
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-4"></div>
+                          <div class="col-4 text-center">
+                            <!-- Botón para abrir el modal -->
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#infoLouis">
+                            Información
+                            </button>
+                          </div>
+                          <div class="col-4"></div></div>
+                        <!-- Modal -->
+                          <div class="modal fade" id="infoLouis" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-dark text-white">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="infoModalLabel">Información de la Obra</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                  </div>
+                                    <div class="modal-body">                               
+                                    <h3>Informacion de Contacto</h1>
+                                  <p>
+                                    Si gustas puedes contactar con su representante a traves de su correo electronico: 
+                                    <a href="mailto:representante@louiswain.com">📨 Representante@LouisWain.com </a>
+                                  </p>
+                                <h4>Elegir Obras Disponibles</h4>
+                                  <div id="galeria">
+                                    <div class="imagen-container">
+                                      <img src="imagenes/louisw3.webp" alt="Retrato digital de una figura femenina con fondo neutro, estilo artístico moderno" />
+                                      <p>Sombras del Recuerdo</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>    
+                                    <div class="imagen-container">
+                                      <img src="imagenes/louisw2.webp" alt="persona con iluminación suave y expresión seria" />
+                                      <p>Silencio de Invierno</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                    <div class="imagen-container">
+                                      <img src="imagenes/louisW1.webp" alt="Composición digital con elementos humanos en un entorno artístico abstracto" />
+                                      <p>Ecos de Identidad</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" id="comprarLouis">Comprar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <div class="container text-center my-4">
+                  <h2 class="fw-bold">Vincent Van Gogh</h2>
+                  <p class="mx-auto" style="max-width: 700px; font-size: 1.1rem;">
+                    Vincent van Gogh (1853-1890) fue un pintor neerlandés cuya obra intensa y emotiva reflejó su compleja salud mental. Su estilo, caracterizado por colores vibrantes y pinceladas expresivas, evolucionó junto a sus crisis personales. Aunque incomprendido en vida, su arte es hoy fundamental en la historia del expresionismo.
+                  </p>
+                <div>
+                  <div class="container py-2 text-center">
+                    <div class="row justify-content-center g-3">
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/vincente.jpg" alt="Artistas">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/barquito.jpg" alt="Barquito a varado.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/valle.jpg" alt="Valle soleado.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/vicent.jpg" alt="Vicent Van Gogh.">
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-4"></div>
+                          <div class="col-4 text-center">
+                            <!-- Botón para abrir el modal -->
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#infoVicent">
+                            Información
+                            </button>
+                          </div>
+                          <div class="col-4"></div></div>
+                        <!-- Modal -->
+                          <div class="modal fade" id="infoVicent" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-dark text-white">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="infoModalLabel">Información de la Obra</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                  </div>
+                                    <div class="modal-body">
+                                    <h3>Informacion de Contacto</h3>
+                                  <p>
+                                    Si gustas puedes contactar con su representante a traves de su correo electronico: 
+                                    <a href="mailto:representante@vicentvangogh.com">📨 Representante@VicentVanGogh.com </a>
+                                  </p>
+                                <h4>Elegir Obras Disponibles</h4>
+                                  <div id="galeria">
+                                    <div class="imagen-container">
+                                      <img src="imagenes/vanGog1.webp" alt="Retrato digital de una figura femenina con fondo neutro, estilo artístico moderno" />
+                                      <p>Sombras del Recuerdo</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>    
+                                    <div class="imagen-container">
+                                      <img src="imagenes/vanGog2.webp" alt="persona con iluminación suave y expresión seria" />
+                                      <p>Silencio de Invierno</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                    <div class="imagen-container">
+                                      <img src="imagenes/vanGog3.webp" alt="Composición digital con elementos humanos en un entorno artístico abstracto" />
+                                      <p>Ecos de Identidad</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" id="comprarVicent">Comprar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+                <div class="container text-center my-4">
+                  <h2 class="fw-bold">Edvard Munch</h2>
+                  <p class="mx-auto" style="max-width: 700px; font-size: 1.1rem;">
+                    Edvard Munch (1863-1944), pintor noruego, exploró en su obra angustia, ansiedad y melancolía. Con líneas sinuosas y colores expresivos, plasmó profundos estados emocionales. Su icónico "El grito" simboliza miedo y alienación universal. Precursor del expresionismo, su legado influyó en generaciones de artistas.
+                  </p>              
+                <div>
+                  <div class="container py-2 text-center">
+                    <div class="row justify-content-center g-3">
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/solito.webp" alt="Miedo y desesperacion.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/dance-of-life.webp" alt="Familiares.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/edvard.webp" alt="Muerte presente.">
+                        </div>
+                      </div>
+                      <div class="col-10 col-sm-6 col-md-3 col-lg-3">
+                        <div class="image-card">
+                          <img src="imagenes/hombre.webp" alt="Cruz Esquizofrenica.">
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-4"></div>
+                          <div class="col-4 text-center">
+                            <!-- Botón para abrir el modal -->
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#edvard">
+                            Información
+                            </button>
+                          </div>
+                          <div class="col-4"></div></div>
+                        <!-- Modal -->
+                          <div class="modal fade" id="edvard" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-dark text-white">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="infoModalLabel">Información de la Obra</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                  </div>
+                                    <div class="modal-body">
+                                    <h3>Informacion de Contacto</h3>
+                                  <p>
+                                    Si gustas puedes contactar con su representante a traves de su correo electronico: 
+                                    <a href="mailto:representante@edvardmunch.com">📨 Representante@EdvardMunch.com </a>
+                                  </p>
+                                  <h4>Elegir Obras Disponibles</h4>
+                                  <div id="galeria">
+                                    <div class="imagen-container">
+                                      <img src="imagenes/edv.webp" alt="Retrato digital de una figura femenina con fondo neutro, estilo artístico moderno" />
+                                      <p>Sombras del Recuerdo</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>    
+                                    <div class="imagen-container">
+                                      <img src="imagenes/edvard.webp" alt="persona con iluminación suave y expresión seria" />
+                                      <p>Silencio de Invierno</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                    <div class="imagen-container">
+                                      <img src="imagenes/edvardmu.webp" alt="Composición digital con elementos humanos en un entorno artístico abstracto" />
+                                      <p>Ecos de Identidad</p>
+                                      <button class="btn-eliminar">Eliminar</button>
+                                    </div>  
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" id="comprarEdvard">Comprar</button>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                        <br>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+            </div>
+        </main>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+          </script>
+          <script src="main.js"></script>
+        <footer>
+            &copy; 2025 Galería de Arte. Todos los derechos reservados.
+        </footer>
+    </body>
+</html>

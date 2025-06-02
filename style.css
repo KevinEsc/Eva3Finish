@@ -1,0 +1,206 @@
+/* Paleta de colores */
+:root {
+    --color-fondo: #393E46;
+    --color-texto: #FFFFFF;
+    --color-enlace: #ffffff;
+    --color-enlace-hover: #0c0c0c;
+    --color-footer: #2F3645;
+    --color-hover-activo: #000000;
+}
+
+/* Tipografía y fondo */
+body {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+    background: linear-gradient(-45deg, #222831, #393E46, #0e1b1b, #948979);
+    background-size: 400% 400%;
+    animation: fondoAnimado 15s ease infinite;
+    color: white;
+    min-height: 100vh;
+    margin: 0;
+}
+
+@keyframes fondoAnimado {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+}
+
+
+html {
+    overflow-y: scroll;
+}
+
+/* Enlaces */
+a {
+    color: var(--color-enlace);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--color-enlace-hover);
+}
+
+/* Botón principal */
+.btn-primary {
+    background-color: var(--color-hover-activo);
+    border-color: rgb(19, 56, 19);
+    color: var(--color-texto);
+}
+.btn-primary:hover {
+    background-color: var(--color-enlace-hover);
+    border-color: rgb(8, 48, 8);
+    color: var(--color-texto);
+}
+/* Navegación */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.3); /* Blanco semitransparente */
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+.navbar-brand, .nav-link {
+    color: var(--color-texto) !important;
+}
+.nav-link.active {
+    color: var(--color-hover-activo) !important;
+    border-radius: 5px;
+}
+.nav-link:hover {
+    color: var(--color-hover-activo) !important;
+}
+/* Sección bienvenida y textos */
+.bienvenida-section,
+.seccion-bienvenida {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 15px;
+    font-size: 18px;
+}
+.bienvenida-section h2 {
+    color: var(--color-texto);
+    margin-bottom: 20px;
+}
+.bienvenida-section img {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+/* Imágenes de galería */
+.image-card {
+    height: 250px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Formulario */
+.form-control {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: var(--color-enlace);
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-footer);
+    color: var(--color-texto);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.texto {
+    word-wrap: break-word;
+}
+#gatico{
+    width: 30px;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+#saludo {
+    font-size: 1.8rem;      /* Aumenta el tamaño de letra */
+    font-weight: bold;     /* Letra más gruesa */
+    text-align: center;    /* Centra el texto */
+    margin-top: rem;      /* Espacio arriba */
+    white-space: pre-wrap; /* Permite saltos de línea + ajuste automático */
+}
+body.contacto input,
+body.contacto textarea,
+body.contacto select {
+    color: black;
+}
+/* Estilos para el modal */
+
+.imagen-container {
+    margin: 10px;
+    display: inline-block;
+    text-align: center;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.imagen-container img {
+    width: 150px;
+    height: auto;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    margin-top: 5px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+    /*personalizado */
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    padding-top: 60px;
+}
+
+#modal img {
+    max-width: 80%;
+    height: auto;
+}
+
+#modal-desc {
+    color: white;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
