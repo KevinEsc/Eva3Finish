@@ -1,5 +1,7 @@
-// Mostrar saludo dinámico en la página de inicio
-window.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    // ------------------------------
+    // SALUDO DINÁMICO EN INICIO
+    // ------------------------------
     const saludo = document.getElementById("saludo");
     if (saludo) {
         const hora = new Date().getHours();
@@ -16,114 +18,110 @@ window.addEventListener("DOMContentLoaded", () => {
         saludo.textContent = mensaje;
     }
 
-    // Redirección desde botones "Comprar" a la página de contacto
+    // ------------------------------
+    // REDIRECCIÓN DE BOTONES "COMPRAR"
+    // ------------------------------
     function redireccionarAContacto() {
         window.location.href = "contacto.html";
     }
 
-    const comprarLouis = document.getElementById("comprarLouis");
-    const comprarVicent = document.getElementById("comprarVicent");
-    const comprarEdvard = document.getElementById("comprarEdvard");
+    ["comprarLouis", "comprarVicent", "comprarEdvard"].forEach(id => {
+        const boton = document.getElementById(id);
+        if (boton) {
+            boton.addEventListener("click", redireccionarAContacto);
+        }
+    });
 
-    if (comprarLouis) comprarLouis.addEventListener("click", redireccionarAContacto);
-    if (comprarVicent) comprarVicent.addEventListener("click", redireccionarAContacto);
-    if (comprarEdvard) comprarEdvard.addEventListener("click", redireccionarAContacto);
-
-    // Modal interactivo en galería
+    // ------------------------------
+    // FUNCIONALIDAD MODAL EN GALERÍA
+    // ------------------------------
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modal-img");
     const modalDesc = document.getElementById("modal-desc");
-    const span = document.getElementsByClassName("close")[0];
+    const closeBtn = document.querySelector(".close");
 
     function abrirModal(src, alt) {
-        modal.style.display = "block";
-        modalImg.src = src;
-        modalDesc.textContent = alt;
+        if (modal && modalImg && modalDesc) {
+            modal.style.display = "block";
+            modalImg.src = src;
+            modalDesc.textContent = alt;
+        }
     }
 
     function cerrarModal() {
-        modal.style.display = "none";
+        if (modal) modal.style.display = "none";
     }
 
-    if (span) {
-        span.onclick = cerrarModal;
+    if (closeBtn) {
+        closeBtn.onclick = cerrarModal;
     }
 
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            cerrarModal();
-        }
+    window.onclick = function (e) {
+        if (e.target === modal) cerrarModal();
     };
-    // Validación del formulario de contacto
+
+    // ------------------------------
+    // GALERÍA - ELIMINAR IMAGEN
+    // ------------------------------
+    document.querySelectorAll("#galeria .imagen-container").forEach(div => {
+        const img = div.querySelector("img");
+        const btn = div.querySelector(".btn-eliminar");
+
+        if (img) {
+            img.onclick = () => abrirModal(img.src, img.alt);
+        }
+
+        if (btn) {
+            btn.onclick = () => div.remove();
+        }
+    });
+
+    // ------------------------------
+    // FORMULARIO DE CONTACTO
+    // ------------------------------
     const form = document.getElementById("formulario-contacto");
+    const nombre = document.getElementById("nombre");
+    const email = document.getElementById("email");
+    const comentario = document.getElementById("comentario");
+    const solicitud = document.getElementById("solicitud");
+    const mensajeDiv = document.getElementById("mensaje-confirmacion");
+
+    function mostrarMensaje(texto, tipo) {
+        if (mensajeDiv) {
+            mensajeDiv.textContent = texto;
+            mensajeDiv.style.color = tipo === "error" ? "red" : "green";
+
+            // Ocultar mensaje luego de unos segundos
+            setTimeout(() => {
+                mensajeDiv.textContent = "";
+            }, 4000);
+        }
+    }
+
+    if (comentario && solicitud) {
+        comentario.addEventListener("input", () => {
+            const texto = comentario.value.toLowerCase();
+            if (texto.includes("compra")) {
+                solicitud.value = "Compra";
+            } else if (texto.includes("venta")) {
+                solicitud.value = "Venta";
+            }
+        });
+    }
 
     if (form) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-            const nombre = document.getElementById("nombre").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const mensaje = document.getElementById("mensaje").value.trim();
-            const tipo = document.getElementById("tipo");
-            const mensajeDiv = document.getElementById("mensaje-confirmacion");
-
-            if (!nombre || !email || !mensaje) {
+            if (!nombre.value.trim() || !email.value.trim() || !comentario.value.trim()) {
                 mostrarMensaje("Todos los campos son obligatorios.", "error");
                 return;
             }
 
-            if (mensaje.toLowerCase().includes("compra")) {
-                tipo.value = "compra";
-            } else if (mensaje.toLowerCase().includes("venta")) {
-                tipo.value = "venta";
-            }
-
             mostrarMensaje("Formulario enviado correctamente.", "exito");
+
+            // Opcional: resetear el formulario
+            // form.reset();
         });
     }
-
-    function mostrarMensaje(texto, tipo) {
-        const mensajeDiv = document.getElementById("mensaje-confirmacion");
-        mensajeDiv.textContent = texto;
-        mensajeDiv.className = tipo;
-    }
 });
-window.addEventListener("DOMContentLoaded", () => {
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modal-img");
-const modalDesc = document.getElementById("modal-desc");
-const span = document.querySelector(".close");
-
-function abrirModal(src, alt) {
-    modal.style.display = "block";
-    modalImg.src = src;
-    modalDesc.textContent = alt;
-}
-
-function cerrarModal() {
-    modal.style.display = "none";
-}
-
-if (span) {
-    span.onclick = cerrarModal;
-}
-
-window.onclick = function (e) {
-    if (e.target == modal) {
-    cerrarModal();
-    }
-};
-
-  // 👉 Recorre todas las imágenes ya cargadas en el HTML
-document.querySelectorAll("#galeria .imagen-container").forEach(div => {
-    const img = div.querySelector("img");
-    const btn = div.querySelector(".btn-eliminar");
-
-    // Al hacer clic en la imagen, abrir modal
-    img.onclick = () => abrirModal(img.src, img.alt);
-
-    // Al hacer clic en "Eliminar", quitar el bloque
-    btn.onclick = () => div.remove();
-});
-});
-
