@@ -96,7 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 4000);
         }
     }
-
+    if (tipo) {
+        tipo.selectedIndex = 0;
+    }
+// Mensaje de comentarios 
     if (comentario && tipo) {
         comentario.addEventListener("input", () => {
             const texto = comentario.value.toLowerCase();
@@ -104,9 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 tipo.value = "Compra";
             } else if (texto.includes("venta")) {
                 tipo.value = "Venta";
+            } else if (texto.includes("consulta")) {
+                tipo.value = "Consulta";
+            } else {
+                tipo.selectedIndex = 0; // Vuelve a la opción "Seleccione una opción"
             }
         });
     }
+
 
     if (form) {
         form.addEventListener("submit", (e) => {
