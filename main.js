@@ -81,30 +81,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // ------------------------------
     const form = document.getElementById("formulario-contacto");
     const nombre = document.getElementById("nombre");
-    const email = document.getElementById("email");
+    const apellido = document.getElementById("apellido");
+    const correo = document.getElementById("correo");
     const comentario = document.getElementById("comentario");
-    const solicitud = document.getElementById("solicitud");
+    const tipo = document.getElementById("tipo");
     const mensajeDiv = document.getElementById("mensaje-confirmacion");
 
     function mostrarMensaje(texto, tipo) {
         if (mensajeDiv) {
             mensajeDiv.textContent = texto;
             mensajeDiv.style.color = tipo === "error" ? "red" : "green";
-
-            // Ocultar mensaje luego de unos segundos
             setTimeout(() => {
                 mensajeDiv.textContent = "";
             }, 4000);
         }
     }
 
-    if (comentario && solicitud) {
+    if (comentario && tipo) {
         comentario.addEventListener("input", () => {
             const texto = comentario.value.toLowerCase();
             if (texto.includes("compra")) {
-                solicitud.value = "Compra";
+                tipo.value = "Compra";
             } else if (texto.includes("venta")) {
-                solicitud.value = "Venta";
+                tipo.value = "Venta";
             }
         });
     }
@@ -112,16 +111,45 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
-
-            if (!nombre.value.trim() || !email.value.trim() || !comentario.value.trim()) {
-                mostrarMensaje("Todos los campos son obligatorios.", "error");
-                return;
-            }
-
-            mostrarMensaje("Formulario enviado correctamente.", "exito");
-
-            // Opcional: resetear el formulario
-            // form.reset();
+            enviarWhatsApp(); // Llama directamente a la función de WhatsApp
         });
     }
+
+    // ------------------------------
+    // FUNCIÓN ENVIAR WHATSAPP CON VALIDACIONES
+    // ------------------------------
+    function enviarWhatsApp() {
+        const nombreVal = nombre.value.trim();
+        const apellidoVal = apellido.value.trim();
+        const correoVal = correo.value.trim();
+        const tipoVal = tipo.value;
+        const comentarioVal = comentario.value.trim();
+
+        if (!nombreVal || !apellidoVal || !correoVal || !tipoVal || !comentarioVal) {
+            mostrarMensaje("Por favor, complete todos los campos.", "error");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correoVal)) {
+            mostrarMensaje("El correo electrónico no es válido.", "error");
+            return;
+        }
+
+        const mensaje =
+            `*Formulario de Contacto*\n\n` +
+            `*Nombre:* ${nombreVal} ${apellidoVal}\n` +
+            `*Correo:* ${correoVal}\n` +
+            `*Tipo de Solicitud:* ${tipoVal}\n` +
+            `*Mensaje:*\n${comentarioVal}`;
+
+        const numeroWhatsApp = "56971307840"; // Reemplaza por tu número real
+        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+
+        window.open(url, "_blank");
+
+        mostrarMensaje("Redirigiendo a WhatsApp...", "success");
+        form.reset();
+    }
 });
+
