@@ -122,6 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tipo) {
         tipo.selectedIndex = 0;
     }
+    // Bandera para bloquear la detección automática una vez que se haya establecido
+    let autoDetectLocked = false;
+    if (tipo) {
+        tipo.addEventListener('change', () => {
+            // Si el usuario cambia manualmente la opción, bloqueamos la detección automática
+            autoDetectLocked = true;
+        });
+    }
     // Mensaje de comentarios 
     if (comentario && tipo) {
         comentario.addEventListener("input", () => {
@@ -133,13 +141,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 contadorDiv.textContent = `${comentario.value.length}/1000 caracteres`;
             }
 
-            // Auto-detectar tipo de solicitud
-            if (texto.includes("compra")) {
-                tipo.value = "Compra";
-            } else if (texto.includes("venta") || texto.includes("vender")) {
-                tipo.value = "Venta";
-            } else if (texto.includes("consulta") || texto.includes("pregunta") || texto.includes("duda")) {
-                tipo.value = "Consulta";
+            // Auto-detectar tipo de solicitud (solo si no está bloqueado)
+            if (!autoDetectLocked) {
+                const idxCompra = texto.indexOf("compra");
+                const idxCompraVar = texto.indexOf("comprar");
+                const idxVenta = texto.indexOf("venta");
+                const idxVender = texto.indexOf("vender");
+                const idxConsulta = Math.min(
+                    texto.indexOf("consulta") === -1 ? Infinity : texto.indexOf("consulta"),
+                    texto.indexOf("pregunta") === -1 ? Infinity : texto.indexOf("pregunta"),
+                    texto.indexOf("duda") === -1 ? Infinity : texto.indexOf("duda")
+                );
+
+                // Buscar el primer índice válido entre las variantes
+                const indices = [
+                    { k: 'Compra', i: idxCompra },
+                    { k: 'Compra', i: idxCompraVar },
+                    { k: 'Venta', i: idxVenta },
+                    { k: 'Venta', i: idxVender },
+                    { k: 'Consulta', i: isFinite(idxConsulta) ? idxConsulta : -1 }
+                ].filter(o => o.i !== -1 && o.i !== Infinity);
+
+                if (indices.length > 0) {
+                    indices.sort((a, b) => a.i - b.i);
+                    tipo.value = indices[0].k;
+                    // Bloquear detección automática tras la primera coincidencia encontrada
+                    autoDetectLocked = true;
+                }
             }
         });
     }
