@@ -96,6 +96,29 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 4000);
         }
     }
+    
+    // Validación de email sin regex susceptible a backtracking
+    function isValidEmail(email) {
+        if (!email) return false;
+        // límites razonables para evitar evaluaciones costosas
+        if (email.length > 254) return false;
+        if (email.indexOf(' ') !== -1) return false;
+        const parts = email.split('@');
+        if (parts.length !== 2) return false;
+        const [local, domain] = parts;
+        if (local.length === 0 || local.length > 64) return false;
+        if (domain.length === 0 || domain.length > 255) return false;
+        if (domain.indexOf('.') === -1) return false;
+        // Validaciones simples por parte para evitar expresiones regulares complejas
+        const localSafe = /^[A-Za-z0-9.!#$%&'*+\/=\?^_`{|}~-]+$/;
+        const domainSafe = /^[A-Za-z0-9.-]+$/;
+        if (!localSafe.test(local) || !domainSafe.test(domain)) return false;
+        const domainParts = domain.split('.');
+        if (domainParts.some(p => p.length === 0)) return false;
+        const tld = domainParts[domainParts.length - 1];
+        if (tld.length < 2) return false;
+        return true;
+    }
     if (tipo) {
         tipo.selectedIndex = 0;
     }
@@ -174,10 +197,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validación en tiempo real para email
     if (correo) {
         correo.addEventListener("blur", () => {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (correo.value.trim() && !emailRegex.test(correo.value.trim())) {
+            const val = correo.value.trim();
+            if (val && !isValidEmail(val)) {
                 correo.classList.add("is-invalid");
-            } else if (correo.value.trim()) {
+            } else if (val) {
                 correo.classList.add("is-valid");
                 correo.classList.remove("is-invalid");
             } else {
@@ -239,9 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Validar email con regex mejorada
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(correoVal)) {
+        // Validar email con función segura para evitar backtracking
+        if (!isValidEmail(correoVal)) {
             mostrarMensaje("El correo electrónico no es válido. Ej: usuario@dominio.com", "error");
             correo.focus();
             return;
