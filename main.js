@@ -135,6 +135,16 @@ document.addEventListener("DOMContentLoaded", () => {
         comentario.addEventListener("input", () => {
             const texto = comentario.value.toLowerCase();
             
+            // Si el campo queda vacío, desbloqueamos la detección automática
+            if (texto.trim() === "") {
+                autoDetectLocked = false;
+                if (tipo) tipo.selectedIndex = 0;
+                // Actualizar contador y salir
+                const contadorDiv = document.getElementById("contador-caracteres");
+                if (contadorDiv) contadorDiv.textContent = `0/1000 caracteres`;
+                return;
+            }
+
             // Actualizar contador de caracteres
             const contadorDiv = document.getElementById("contador-caracteres");
             if (contadorDiv) {
