@@ -99,17 +99,90 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tipo) {
         tipo.selectedIndex = 0;
     }
-// Mensaje de comentarios 
+    // Mensaje de comentarios 
     if (comentario && tipo) {
         comentario.addEventListener("input", () => {
             const texto = comentario.value.toLowerCase();
+            
+            // Actualizar contador de caracteres
+            const contadorDiv = document.getElementById("contador-caracteres");
+            if (contadorDiv) {
+                contadorDiv.textContent = `${comentario.value.length}/1000 caracteres`;
+            }
+
+            // Auto-detectar tipo de solicitud
             if (texto.includes("compra")) {
                 tipo.value = "Compra";
-            } else if (texto.includes("venta")) {
+            } else if (texto.includes("venta") || texto.includes("vender")) {
                 tipo.value = "Venta";
-            } else {
+            } else if (texto.includes("consulta") || texto.includes("pregunta") || texto.includes("duda")) {
                 tipo.value = "Consulta";
-            } 
+            }
+        });
+    }
+
+    // Validación en tiempo real para nombre
+    if (nombre) {
+        nombre.addEventListener("input", () => {
+            const soloLetrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/;
+            if (nombre.value && !soloLetrasRegex.test(nombre.value)) {
+                nombre.classList.add("is-invalid");
+                nombre.classList.remove("is-valid");
+            } else {
+                nombre.classList.remove("is-invalid");
+            }
+        });
+        
+        nombre.addEventListener("blur", () => {
+            const soloLetrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+            if (nombre.value.trim() && !soloLetrasRegex.test(nombre.value.trim())) {
+                nombre.classList.add("is-invalid");
+            } else if (nombre.value.trim().length >= 2) {
+                nombre.classList.add("is-valid");
+                nombre.classList.remove("is-invalid");
+            } else {
+                nombre.classList.remove("is-valid", "is-invalid");
+            }
+        });
+    }
+
+    // Validación en tiempo real para apellido
+    if (apellido) {
+        apellido.addEventListener("input", () => {
+            const soloLetrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/;
+            if (apellido.value && !soloLetrasRegex.test(apellido.value)) {
+                apellido.classList.add("is-invalid");
+                apellido.classList.remove("is-valid");
+            } else {
+                apellido.classList.remove("is-invalid");
+            }
+        });
+        
+        apellido.addEventListener("blur", () => {
+            const soloLetrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+            if (apellido.value.trim() && !soloLetrasRegex.test(apellido.value.trim())) {
+                apellido.classList.add("is-invalid");
+            } else if (apellido.value.trim().length >= 2) {
+                apellido.classList.add("is-valid");
+                apellido.classList.remove("is-invalid");
+            } else {
+                apellido.classList.remove("is-valid", "is-invalid");
+            }
+        });
+    }
+
+    // Validación en tiempo real para email
+    if (correo) {
+        correo.addEventListener("blur", () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (correo.value.trim() && !emailRegex.test(correo.value.trim())) {
+                correo.classList.add("is-invalid");
+            } else if (correo.value.trim()) {
+                correo.classList.add("is-valid");
+                correo.classList.remove("is-invalid");
+            } else {
+                correo.classList.remove("is-valid", "is-invalid");
+            }
         });
     }
 
@@ -131,17 +204,71 @@ document.addEventListener("DOMContentLoaded", () => {
         const tipoVal = tipo.value;
         const comentarioVal = comentario.value.trim();
 
+        // Validar que todos los campos estén completos
         if (!nombreVal || !apellidoVal || !correoVal || !tipoVal || !comentarioVal) {
             mostrarMensaje("Por favor, complete todos los campos.", "error");
             return;
         }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(correoVal)) {
-            mostrarMensaje("El correo electrónico no es válido.", "error");
+        // Validar que el nombre solo contenga letras y espacios
+        const soloLetrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!soloLetrasRegex.test(nombreVal)) {
+            mostrarMensaje("El nombre solo debe contener letras y espacios.", "error");
+            nombre.focus();
             return;
         }
 
+        // Validar que el apellido solo contenga letras y espacios
+        if (!soloLetrasRegex.test(apellidoVal)) {
+            mostrarMensaje("El apellido solo debe contener letras y espacios.", "error");
+            apellido.focus();
+            return;
+        }
+
+        // Validar longitud mínima del nombre
+        if (nombreVal.length < 2) {
+            mostrarMensaje("El nombre debe tener al menos 2 caracteres.", "error");
+            nombre.focus();
+            return;
+        }
+
+        // Validar longitud mínima del apellido
+        if (apellidoVal.length < 2) {
+            mostrarMensaje("El apellido debe tener al menos 2 caracteres.", "error");
+            apellido.focus();
+            return;
+        }
+
+        // Validar email con regex mejorada
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correoVal)) {
+            mostrarMensaje("El correo electrónico no es válido. Ej: usuario@dominio.com", "error");
+            correo.focus();
+            return;
+        }
+
+        // Validar longitud mínima del comentario
+        if (comentarioVal.length < 10) {
+            mostrarMensaje("La solicitud debe tener al menos 10 caracteres.", "error");
+            comentario.focus();
+            return;
+        }
+
+        // Validar longitud máxima del comentario
+        if (comentarioVal.length > 1000) {
+            mostrarMensaje("La solicitud no puede exceder 1000 caracteres.", "error");
+            comentario.focus();
+            return;
+        }
+
+        // Validar que se haya seleccionado un tipo
+        if (!tipoVal) {
+            mostrarMensaje("Por favor, seleccione un tipo de solicitud.", "error");
+            tipo.focus();
+            return;
+        }
+
+        // Construir el mensaje para WhatsApp
         const mensaje =
             `*Formulario de Contacto*\n\n` +
             `*Nombre:* ${nombreVal} ${apellidoVal}\n` +
@@ -154,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.open(url, "_blank");
 
-        mostrarMensaje("Redirigiendo a WhatsApp...", "success");
+        mostrarMensaje("✓ Solicitud enviada correctamente. Redirigiendo a WhatsApp...", "success");
         form.reset();
     }
 });

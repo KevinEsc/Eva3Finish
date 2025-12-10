@@ -44,21 +44,24 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
-                    <form id="formulario-contacto" class="row g-3">
+                    <form id="formulario-contacto" class="row g-3" novalidate>
                         <div class="col-6">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Escriba su nombre" required>
+                            <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Escriba su nombre" required minlength="2" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
+                            <small class="form-text text-muted">Solo letras, mínimo 2 caracteres</small>
                         </div>
                         <div class="col-6">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Escriba su apellido" required>
+                            <label for="apellido" class="form-label">Apellido <span class="text-danger">*</span></label>
+                            <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Escriba su apellido" required minlength="2" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
+                            <small class="form-text text-muted">Solo letras, mínimo 2 caracteres</small>
                         </div>
                         <div class="col-12">
-                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <label for="correo" class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
                             <input type="email" name="correo" id="correo" class="form-control" placeholder="ejemplo@ejemplo.cl" required>
+                            <small class="form-text text-muted">Formato: usuario@dominio.com</small>
                         </div>
                         <div class="col-12">
-                            <label for="tipo" class="form-label">Tipo de Solicitud:</label>
+                            <label for="tipo" class="form-label">Tipo de Solicitud <span class="text-danger">*</span></label>
                             <select id="tipo" name="tipo" class="form-select" required>
                                 <option value="" selected disabled>Seleccione una opción</option>
                                 <option value="Compra">Compra</option>
@@ -67,8 +70,9 @@
                             </select>
                         </div>
                         <div class="col-12">
-                            <label for="comentario" class="form-label">Solicitud</label>
-                            <textarea class="form-control" name="comentario" id="comentario" placeholder="Escriba acá su solicitud" required></textarea>
+                            <label for="comentario" class="form-label">Solicitud <span class="text-danger">*</span></label>
+                            <textarea class="form-control" name="comentario" id="comentario" placeholder="Escriba acá su solicitud" required minlength="10" maxlength="1000"></textarea>
+                            <small class="form-text text-muted" id="contador-caracteres">0/1000 caracteres</small>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-success">Enviar por WhatsApp</button>

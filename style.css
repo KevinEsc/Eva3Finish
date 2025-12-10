@@ -3,9 +3,9 @@
     --color-fondo: #393E46;
     --color-texto: #FFFFFF;
     --color-enlace: #ffffff;
-    --color-enlace-hover: #0c0c0c;
+    --color-enlace-hover: #1b5e20;
     --color-footer: #2F3645;
-    --color-hover-activo: #000000;
+    --color-hover-activo: #1b5e20;
 }
 
 /* Tipografía y fondo */
@@ -75,6 +75,18 @@ a:hover {
 .nav-link:hover {
     color: var(--color-hover-activo) !important;
 }
+/* Texto de ayuda en formularios */
+.form-text {
+    color: #90EE90 !important;
+    font-size: 0.875em;
+    display: none;
+}
+
+/* Mostrar texto de ayuda solo cuando hay error */
+.form-control.is-invalid ~ .form-text {
+    display: block;
+}
+
 /* Sección bienvenida y textos */
 .bienvenida-section,
 .seccion-bienvenida {
@@ -131,7 +143,7 @@ footer {
     width: 30px;
 }
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='black' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23004d1a' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 #saludo {
     font-size: 1.8rem;      /* Aumenta el tamaño de letra */
@@ -147,29 +159,66 @@ body.contacto select {
 }
 /* Estilos para el modal */
 
+#galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+    padding: 20px;
+}
+
 .imagen-container {
-    margin: 10px;
-    display: inline-block;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     background-color: #2a2a2a;
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(27, 94, 32, 0.3);
+}
+
+.imagen-container:hover {
+    transform: translateY(-5px);
+    background-color: #3a3a3a;
+    border-color: rgba(27, 94, 32, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .imagen-container img {
     width: 150px;
-    height: auto;
-    border-radius: 4px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.imagen-container img:hover {
+    transform: scale(1.05);
+}
+
+.imagen-container p {
+    margin: 10px 0 8px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    word-break: break-word;
 }
 
 .btn-eliminar {
-    margin-top: 5px;
-    background-color: crimson;
+    margin-top: 8px;
+    background-color: #d32f2f;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.85rem;
 }
 
     /*personalizado */
